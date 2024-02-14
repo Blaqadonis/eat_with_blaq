@@ -70,4 +70,4 @@ iface = gr.Interface(
     allow_flagging="never"
 )
 
-iface.launch(debug=True, share=True)
+iface.launch(debug=True, share=True, server_port=8080)
