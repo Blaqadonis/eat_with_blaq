@@ -1,16 +1,16 @@
-from fastapi import FastAPI
 import gradio as gr
 from dotenv import load_dotenv
 import os
 from PIL import Image
 import google.generativeai as genai
+from google.colab import userdata
 from io import BytesIO
 
 # Load environment variables
-load_dotenv()  # Uncomment this if you are using a .env file to store your API key
+#load_dotenv()  # Uncomment this if you are using a .env file to store your API key
 
 # Configure the Google Generative AI
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=userdata.get("GOOGLE_API_KEY"))
 
 def get_gemini_response(input, image, prompt):
     model = genai.GenerativeModel('gemini-pro-vision')
@@ -71,16 +71,4 @@ iface = gr.Interface(
     allow_flagging="never"
 )
 
-# Create FastAPI app
-app = FastAPI()
-
-# Define root endpoint
-@app.get('/')
-async def root():
-    return '🅱🅻🅰🆀\'s NLP Task Performer is running!', 200
-
-# Mount Gradio app on FastAPI
-app = gr.mount_gradio_app(app, iface, path='/gradio')
-
-# Launch FastAPI app
 iface.launch(debug=True, share=True)
