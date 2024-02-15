@@ -1,3 +1,4 @@
+fastapi
 gradio
 google-generativeai
 python-dotenv
