@@ -1,3 +1,4 @@
+from fastapi import FastAPI
 import gradio as gr
 from dotenv import load_dotenv
 import os
@@ -70,4 +71,16 @@ iface = gr.Interface(
     allow_flagging="never"
 )
 
-iface.launch(debug=True, share=True, server_port=8080)
+# Create FastAPI app
+app = FastAPI()
+
+# Define root endpoint
+@app.get('/')
+async def root():
+    return '🅱🅻🅰🆀\'s NLP Task Performer is running!', 200
+
+# Mount Gradio app on FastAPI
+app = gr.mount_gradio_app(app, iface, path='/gradio')
+
+# Launch FastAPI app
+iface.launch(debug=True, share=True, server=False)
