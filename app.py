@@ -3,14 +3,13 @@ from dotenv import load_dotenv
 import os
 from PIL import Image
 import google.generativeai as genai
-from google.colab import userdata
 from io import BytesIO
 
 # Load environment variables
-#load_dotenv()  # Uncomment this if you are using a .env file to store your API key
+load_dotenv()  # Uncomment this if you are using a .env file to store your API key
 
 # Configure the Google Generative AI
-genai.configure(api_key=userdata.get("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_gemini_response(input, image, prompt):
     model = genai.GenerativeModel('gemini-pro-vision')
