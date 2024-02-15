@@ -83,4 +83,4 @@ async def root():
 app = gr.mount_gradio_app(app, iface, path='/gradio')
 
 # Launch FastAPI app
-iface.launch(debug=True, share=True, server=False)
+iface.launch(debug=True, share=True)
